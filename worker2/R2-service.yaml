@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: workerr2
+  labels:
+    app: workerr2
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 7778
+      targetPort: 7778
+  selector:
+    app: workerr2

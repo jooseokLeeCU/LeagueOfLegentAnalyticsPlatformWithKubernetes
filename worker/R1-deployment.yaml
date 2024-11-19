@@ -1,0 +1,33 @@
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: workerr1
+spec:
+  selector:
+    matchLabels:
+      app: workerr1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: workerr1  
+    spec:
+      containers:
+      - name: workerr1
+        image: seungwooklee/final-worker:v3.1
+        ports: 
+          - containerPort: 7777
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: REDIS_HOST
+          value: redis
+        - name: REDIS_PORT
+          value: '6379'
+        - name: R1_HOST
+          value: mysql
+        - name: R1_PORT
+          value: '3306'
+        
